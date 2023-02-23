@@ -52,12 +52,14 @@ public class Lesson15Test {
                     System.out.println("Input array of bad words and phrases, delimited by comma: ");
                     String inputString = scanner.nextLine();
 
-                    String[] inputArrayOfBadWords = inputString.split(",");
+                    String[] inputArrayOfBadWords = inputString.split(", ");
                     TextBlackListFilter tblf = new TextBlackListFilter(inputArrayOfBadWords);
                     System.out.print("Input string for work: ");
                     String inputStr = scanner.nextLine();
 
+                    boolean flag = true;
                     do {
+
                         System.out.println("What we will to do? \n");
                         System.out.println("***** 21. Contains bad words");
                         System.out.println("***** 22. Number of bad words in string");
@@ -69,13 +71,12 @@ public class Lesson15Test {
                             case 21 -> System.out.println(tblf.isContainsBadWords(inputStr));
                             case 22 -> System.out.println(tblf.badWordsCounter(inputStr));
                             case 23 -> System.out.println(tblf.modificateBadWords(inputStr));
-                            case 0 -> {
-                                return;
-                            }
+                            case 0 -> flag = false;
+
                             default -> System.out.println("Wrong key!!!");
                         }
                     }
-                    while (true);
+                    while (flag);
                 }
 
                 case 0 -> {

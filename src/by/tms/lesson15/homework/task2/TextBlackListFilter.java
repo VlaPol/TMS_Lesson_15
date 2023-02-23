@@ -58,14 +58,4 @@ public class TextBlackListFilter {
         );
     }
 
-
-    public static void main(String[] args) {
-        TextBlackListFilter tblf = new TextBlackListFilter("bad", "beatch", "cool", "to дурак", "asshole", "Car", "SEX");
-
-        System.out.println(tblf.isContainsBadWords("It's bad great to дурак you SeX"));
-        System.out.println(tblf.badWordsCounter("It's bad great to дурак you SeX"));
-        System.out.println(tblf.modificateBadWords("It's bad great to дурак you SeX"));
-
-    }
-
 }
