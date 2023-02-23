@@ -1,4 +1,4 @@
-package by.tms.lesson15.homework.tsak2;
+package by.tms.lesson15.homework.task2;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
