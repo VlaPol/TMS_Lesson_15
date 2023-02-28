@@ -70,7 +70,7 @@ public class Lesson15Test {
                         switch (subKey) {
                             case 21 -> System.out.println(tblf.isContainsBadWords(inputStr));
                             case 22 -> System.out.println(tblf.badWordsCounter(inputStr));
-                            case 23 -> System.out.println(tblf.modificateBadWords(inputStr));
+                            case 23 -> System.out.println(tblf.modificationBadWords(inputStr));
                             case 0 -> flag = false;
 
                             default -> System.out.println("Wrong key!!!");

@@ -15,8 +15,8 @@ public class BlrPassport {
     private final LocalDate endDate;
 
 
-    public static final int PASSPORT_ID = 14;
-    public static final int PASSPORT_NUMBER = 9;
+    public static final int PASSPORT_ID_LENGTH = 14;
+    public static final int PASSPORT_NUMBER_LENGTH = 9;
 
     public BlrPassport(String idNumber, String name, String surname, Gender gender, LocalDate birthDate,
                        String passNumber, LocalDate beginDate, LocalDate endDate) {
@@ -54,7 +54,7 @@ public class BlrPassport {
     }
 
     private boolean isGoodPassNumber(String passNumber) {
-        if (passNumber.length() != PASSPORT_NUMBER) {
+        if (passNumber.length() != PASSPORT_NUMBER_LENGTH) {
             throw new IllegalArgumentException("Passport number should contains 9 signs");
         }
         return passNumber.matches("(AB|BM|HB|KH|MP|MC|KB|PP|SP|DP)\\d{7}");
@@ -65,12 +65,12 @@ public class BlrPassport {
         if (name == null || surname == null) {
             throw new IllegalArgumentException("Name and surname are needed");
         }
-        return name.matches("^[a-zA-Z]+$") && surname.matches("^[a-zA-Z]+$");
+        return name.matches("[a-zA-Z]+") && surname.matches("[a-zA-Z]+");
     }
 
     private boolean isValidIdNumber(String idNumber) {
 
-        if (idNumber.length() != PASSPORT_ID) {
+        if (idNumber.length() != PASSPORT_ID_LENGTH) {
             throw new IllegalArgumentException("Passport identification number should contains 14 signs");
         }
         return idNumber.matches("\\d{7}[ABCKEMH]\\d{3}(PB|BA|BI)\\d");

@@ -5,17 +5,22 @@ import java.util.regex.Pattern;
 
 public class TextBlackListFilter {
 
-    private final String[] BAD_WORDS_OR_PHRASES;
+    private final Pattern[] pattern;
 
     public TextBlackListFilter(String... badWordsOrPhrases) {
-        this.BAD_WORDS_OR_PHRASES = badWordsOrPhrases;
+
+        pattern = new Pattern[badWordsOrPhrases.length];
+
+        for (int i = 0; i < badWordsOrPhrases.length; i++) {
+            pattern[i] = getPattern(badWordsOrPhrases[i]);
+        }
+
     }
 
     public boolean isContainsBadWords(String inputString) {
 
-        for (String badWordsAndPhrase : BAD_WORDS_OR_PHRASES) {
-            Pattern pattern = getPattern(badWordsAndPhrase);
-            Matcher matcher = pattern.matcher(inputString);
+        for (Pattern itm : pattern) {
+            Matcher matcher = itm.matcher(inputString);
             if (matcher.find()) {
                 return true;
             }
@@ -27,28 +32,24 @@ public class TextBlackListFilter {
 
         int badWordsCounter = 0;
 
-        for (String badWordsAndPhrase : BAD_WORDS_OR_PHRASES) {
-            Pattern pattern = getPattern(badWordsAndPhrase);
-            Matcher matcher = pattern.matcher(inputString);
-            if (matcher.find()) {
+        for (Pattern itm : pattern) {
+            Matcher matcher = itm.matcher(inputString);
+
+            while (matcher.find()) {
                 badWordsCounter++;
             }
         }
+
         return badWordsCounter;
     }
 
-    public StringBuilder modificateBadWords(String inputString){
+    public String modificationBadWords(String inputString) {
 
-        StringBuilder tmp = new StringBuilder(inputString);
-
-        for (String badWordsAndPhrase : BAD_WORDS_OR_PHRASES) {
-            Pattern pattern = getPattern(badWordsAndPhrase);
-            Matcher matcher = pattern.matcher(tmp);
-            if (matcher.find()) {
-                tmp.replace(matcher.start(), matcher.end(), "######");
-            }
+        for (Pattern itm : pattern) {
+            Matcher matcher = itm.matcher(inputString);
+            inputString = matcher.replaceAll("#####");
         }
-        return tmp;
+        return inputString;
     }
 
     private Pattern getPattern(String badWordOrPhrase) {
